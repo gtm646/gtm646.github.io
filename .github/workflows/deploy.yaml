@@ -1,17 +1,26 @@
-name: Deploy React app to GitHub Pages
+name: Deploy Vite site to GitHub Pages (Official)
 
 on:
   push:
     branches:
       - main  # Trigger the workflow when pushing to the `main` branch
 
+permissions:
+  contents: read     # Allow read access to the contents of the repo
+  pages: write       # Allow write access to GitHub Pages
+  id-token: write    # Required for authentication
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code 🛎️
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -19,19 +28,24 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Install and Build 🔧 
-        run: |
-          npm ci
-          npm run build
+      - name: Build the Vite app
+        run: npm run build
 
-      - name: Add cache-busting timestamp
-        run: echo "Built at $(date)" > dist/deploy-timestamp.txt
-
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload the build to GitHub Pages
+        uses: actions/upload-pages-artifact@v2
         with:
-          branch: gh-pages
-          folder: dist
-          token: ${{ secrets.GTM646_TOKEN }}
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
