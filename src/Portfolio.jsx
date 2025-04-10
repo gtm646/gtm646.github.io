@@ -43,7 +43,7 @@ export default function Portfolio() {
                   Gowtham Nimmana
                 </motion.h1>
                 <p className="text-2xl md:text-3xl text-gray-400 mt-6 font-light">
-                  Senior Software Engineer | Cloud Architect | DevOps Advocate
+                  Senior Software Engineer | Solution Architect | DevOps Advocate
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 mt-10">
                   <a href="mailto:gowtham.nimmana@outlook.com" className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-base">Contact Me</a>
