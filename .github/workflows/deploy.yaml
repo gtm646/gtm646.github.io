@@ -25,6 +25,9 @@ jobs:
         run: |
           npm ci
           npm run build
+          
+      - name: Add cache-busting timestamp
+        run: echo "Built at $(date)" > dist/deploy-timestamp.txt
 
       - name: List dist contents
         run: ls -la dist
