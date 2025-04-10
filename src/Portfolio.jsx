@@ -138,8 +138,8 @@ export default function Portfolio() {
             title: "Certifications",
             content: (
               <ul className="list-disc list-inside text-gray-300">
-                <li>AWS Certified Solutions Architect – Pro</li>
-                <li>AWS Certified DevOps Engineer – Pro</li>
+                <li>AWS Certified Solutions Architect – Professional</li>
+                <li>AWS Certified DevOps Engineer – Professional</li>
                 <li>Oracle Certified Java Developer</li>
                 <li>Scrum Master – PSM I</li>
               </ul>
