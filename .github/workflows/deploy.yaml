@@ -35,3 +35,4 @@ jobs:
           branch: gh-pages
           folder: dist
           token: ${{ secrets.GTM646_TOKEN }}
+          force: true 
